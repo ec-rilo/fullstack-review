@@ -11,7 +11,7 @@ const RepoList = (props) => (
             <div>
               <p>INDEX: {index + 1}</p>
               <p>USER: {repo.user}</p>
-              <p>REPO: {repo.repo_name}</p>
+              <p>REPO: <a href={repo.html_url} target='_blank'>{repo.repo_name}</a></p>
             </div>
           </li>
         );

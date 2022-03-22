@@ -18,15 +18,20 @@ class App extends React.Component {
   search (term) {
     console.log(`${term} was searched`);
     if (term !== '') {
-      serverRequest.postUser(term);
+      serverRequest.postUser(term, () => {
+        this.updateRepos(term);
+      });
     }
   }
 
-  updateRepos() {
-    serverRequest.getTop25((err, data) => {
+  updateRepos(title) {
+    console.log('TITLE: ', title);
+
+    serverRequest.getTop25(title, (err, data) => {
       if (err) {
         console.error(err);
       } else {
+        console.log('DATA: ', data);
         this.setState({
           repos: data
         });
@@ -35,14 +40,14 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.updateRepos();
+    this.updateRepos('ec-rilo');
   }
 
   render () {
     return (<div>
       <h1>Github Fetcher</h1>
       <RepoList repos={this.state.repos}/>
-      <Search onSearch={this.search} handleRepos={this.updateRepos}/>
+      <Search onSearch={this.search}/>
     </div>)
   }
 }

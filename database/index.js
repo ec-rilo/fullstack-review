@@ -8,6 +8,7 @@ let repoSchema = mongoose.Schema({
   id: Number,
   repo_name: String,
   forks_count: Number,
+  html_url: String,
   user_id: Number,
   user: String
 });
@@ -20,6 +21,7 @@ let save = (repo) => {
     id: repo.id,
     repo_name: repo.name,
     forks_count: repo.forks_count,
+    html_url: repo.url,
     user_id: repo.user_id,
     user: repo.user
   });
@@ -38,8 +40,8 @@ let save = (repo) => {
   });
 }
 
-let getTop25 = (callback) => {
-  Promise.resolve(Repo.find())
+let getTop25 = (title = 'ec-rilo', callback) => {
+  Promise.resolve(Repo.find({user: title}))
   .then((response) => {
     const top25 = [ response[0] ];
 
@@ -66,6 +68,12 @@ let getTop25 = (callback) => {
     console.error(err);
   })
 }
+
+/*
+returns the top 25 repos of a specific user
+iterate over each repo within the specific users array
+
+*/
 
 module.exports.save = save;
 module.exports.Repo = Repo;

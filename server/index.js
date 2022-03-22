@@ -11,11 +11,13 @@ app.post('/repos', function (req, res) {
     response.forEach((repo) => {
       db.save(repo);
     });
+    res.send('Successfully Posted!');
   });
 });
 
 app.get('/repos', function (req, res) {
-  db.getTop25((top25) => {
+  console.log(req.query);
+  db.getTop25(req.query.username, (top25) => {
     res.send(top25);
   });
 });

@@ -1,20 +1,24 @@
 const axios = require('axios');
 
 const serverRequest = {
-  postUser: (username) => {
+  postUser: (username, callback) => {
     axios.post('/repos', {
       username
     })
     .then((response) => {
-      console.log('(src/request.js): Successfully posted!', response);
+      callback(null);
     })
     .catch((err) => {
-      console.error('(src/request.js) - Error made in posting username: ', err);
+      callback(err);
     });
   },
 
-  getTop25: (callback) => {
-    axios.get('/repos')
+  getTop25: (title, callback) => {
+    axios.get('/repos', {
+      params: {
+        username: title
+      }
+    })
     .then((response) => {
       callback(null, response.data);
     })

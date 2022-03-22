@@ -2,10 +2,12 @@ const axios = require('axios');
 const config = require('../config.js');
 
 const formatRepo = (repo) => {
+
   return {
     id: repo.id,
     name: repo.name,
     forks_count: repo.forks,
+    url: repo.html_url,
     user_id: repo.owner.id,
     user: repo.owner.login
   }
