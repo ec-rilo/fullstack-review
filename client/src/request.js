@@ -11,6 +11,16 @@ const serverRequest = {
     .catch((err) => {
       console.error('(src/request.js) - Error made in posting username: ', err);
     });
+  },
+
+  getTop25: (callback) => {
+    axios.get('/repos')
+    .then((response) => {
+      callback(null, response.data);
+    })
+    .catch((err) => {
+      callback(err);
+    });
   }
 }
 

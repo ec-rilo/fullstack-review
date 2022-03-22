@@ -8,21 +8,16 @@ app.use(express.json());
 
 app.post('/repos', function (req, res) {
   gh.getReposByUsername(req.body.username, (response) => {
-
     response.forEach((repo) => {
       db.save(repo);
     });
-
   });
-  // TODO - your code here!
-  // This route should take the github username provided
-  // and get the repo information from the github API, then
-  // save the repo information in the database
 });
 
 app.get('/repos', function (req, res) {
-  // TODO - your code here!
-  // This route should send back the top 25 repos
+  db.getTop25((top25) => {
+    res.send(top25);
+  });
 });
 
 let port = 1128;
