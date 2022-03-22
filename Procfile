@@ -1,1 +1,1 @@
-web: npm react-dev
+web: npm run react-dev
