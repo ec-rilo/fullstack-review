@@ -1,4 +1,5 @@
 import React from 'react';
+import serverRequest from '../request.js';
 
 class Search extends React.Component {
   constructor(props) {
@@ -17,6 +18,7 @@ class Search extends React.Component {
 
   search() {
     this.props.onSearch(this.state.term);
+    serverRequest.postUser(this.state.term);
   }
 
   render() {
