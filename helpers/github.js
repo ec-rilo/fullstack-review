@@ -1,5 +1,4 @@
 const axios = require('axios');
-const config = require('../config.js');
 
 const formatRepo = (repo) => {
 
@@ -37,10 +36,9 @@ let getReposByUsername = (username, callback) => {
     url: 'FILL ME IN',
     headers: {
       'User-Agent': 'request',
-      'Authorization': `token ${config.TOKEN}`
+      'Authorization': `token ${process.env.TOKEN}`
     }
   };
-
 }
 
 module.exports.getReposByUsername = getReposByUsername;
